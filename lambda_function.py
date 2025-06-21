@@ -3,7 +3,7 @@ import boto3
 from content_moderator import ContentModerator
 from config import *
 
-def lambda_handler(event, context):
+def lambda_handler(event: dict, context) -> dict:
     """
     AWS Lambda function triggered by S3 PutObject events
     """
@@ -50,7 +50,7 @@ def lambda_handler(event, context):
             })
         }
 
-def _is_image_file(filename):
+def _is_image_file(filename: str) -> bool:
     """Check if file is an image based on extension"""
     image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'}
     return any(filename.lower().endswith(ext) for ext in image_extensions) 

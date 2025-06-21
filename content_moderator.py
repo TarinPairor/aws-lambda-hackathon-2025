@@ -61,7 +61,7 @@ class ContentModerator:
                 'error': str(e)
             }
     
-    def process_video(self, video_path):
+    def process_video(self, video_path: str):
         """
         Process a video file and return detection results for each frame
         """
@@ -123,7 +123,7 @@ class ContentModerator:
                 'error': str(e)
             }
     
-    def handle_s3_image(self, bucket_name, object_key):
+    def handle_s3_image(self, bucket_name: str, object_key: str) -> dict:
         """
         Handle S3 image upload - download, process, and take action
         """
@@ -164,7 +164,7 @@ class ContentModerator:
                 'error': str(e)
             }
     
-    def _move_to_quarantine(self, source_bucket, object_key):
+    def _move_to_quarantine(self, source_bucket: str, object_key: str):
         """Move object to quarantine bucket"""
         try:
             # Copy to quarantine bucket
@@ -197,8 +197,9 @@ class ContentModerator:
             )
         except Exception as e:
             print(f"Error adding verified tag: {e}")
-    
-    def _send_alert_email(self, object_key, detections):
+
+
+    def _send_alert_email(self, object_key: str, detections: list):
         """Send alert email via SES"""
         try:
             detection_summary = "\n".join([
