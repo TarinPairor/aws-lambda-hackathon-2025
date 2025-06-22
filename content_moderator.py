@@ -11,7 +11,15 @@ from config import *
 
 class ContentModerator:
     def __init__(self):
-        self.model = YOLO(MODEL_PATH)
+        try:
+            # Initialize YOLO model - will download automatically if not present
+            print(f"Loading YOLO model from: {MODEL_PATH}")
+            self.model = YOLO(MODEL_PATH)
+            print("YOLO model loaded successfully!")
+        except Exception as e:
+            print(f"Error loading YOLO model: {e}")
+            raise
+        
         self.s3_client = boto3.client('s3', region_name=AWS_REGION)
         self.ses_client = boto3.client('ses', region_name=AWS_REGION)
         
@@ -201,6 +209,7 @@ class ContentModerator:
 
     def _send_alert_email(self, object_key: str, detections: list):
         """Send alert email via SES"""
+        return
         try:
             detection_summary = "\n".join([
                 f"- {d['class']} (confidence: {d['confidence']:.2f})"
