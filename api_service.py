@@ -4,6 +4,7 @@ from mangum import Mangum
 import tempfile
 import os
 from content_moderator import ContentModerator
+import uvicorn
 
 app = FastAPI(title="Content Moderation API")
 
@@ -95,3 +96,6 @@ async def analyze_video(file: UploadFile):
 
 # Handler for AWS Lambda
 handler = Mangum(app) 
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

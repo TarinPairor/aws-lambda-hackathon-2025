@@ -13,11 +13,13 @@ def test_image_processing():
         print("Content moderator initialized successfully!")
         
         # Test with a sample image from the internet (or use local file)
-        test_image_url = "https://ultralytics.com/images/bus.jpg"  # Sample image with people and bus
+        # test_image_url = "https://ultralytics.com/images/bus.jpg"  # Sample image with people and bus
         
-        print(f"Downloading test image from: {test_image_url}")
-        response = requests.get(test_image_url)
-        image_data = response.content
+        # print(f"Downloading test image from: {test_image_url}")
+        # response = requests.get(test_image_url)
+        # image_data = response.content
+        test_image_path = r"/Users/tarinpairor/Downloads/knives.jpg"
+        image_data = open(test_image_path, "rb").read()
         
         result = moderator.process_image(image_data)
         print(f"Image processing result: {result}")

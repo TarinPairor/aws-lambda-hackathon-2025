@@ -21,6 +21,7 @@ class ContentModerator:
             raise
         
         self.s3_client = boto3.client('s3', region_name=AWS_REGION)
+        # print(f"S3 client initialized with region: {AWS_REGION}")
         self.ses_client = boto3.client('ses', region_name=AWS_REGION)
         
     def process_image(self, image_data):
